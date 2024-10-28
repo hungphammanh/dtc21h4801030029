@@ -1,0 +1,48 @@
+﻿@model IEnumerable<dtc21h4801030029.Models.TTGiay>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiGiay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThongTin)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiGiay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThongTin)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idGiay }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idGiay }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idGiay })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@using (Html.BeginForm("Search", "TTGiays", FormMethod.Get))
+{
+    <p>
+        Tìm kiếm loại giày: @Html.TextBox("loaiGiay")
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BanGiay1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GiayChiTiet1">
+          <Key>
+            <PropertyRef Name="idTT" />
+          </Key>
+          <Property Name="idTT" Type="int" Nullable="false" />
+          <Property Name="TenGiay" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Mau" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Soluong" Type="int" Nullable="false" />
+          <Property Name="idGiay" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TTGiay">
+          <Key>
+            <PropertyRef Name="idGiay" />
+          </Key>
+          <Property Name="idGiay" Type="int" Nullable="false" />
+          <Property Name="LoaiGiay" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ThongTin" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_GiayChiTiet1_TTGiay">
+          <End Role="TTGiay" Type="Self.TTGiay" Multiplicity="1" />
+          <End Role="GiayChiTiet1" Type="Self.GiayChiTiet1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTGiay">
+              <PropertyRef Name="idGiay" />
+            </Principal>
+            <Dependent Role="GiayChiTiet1">
+              <PropertyRef Name="idGiay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BanGiay1ModelStoreContainer">
+          <EntitySet Name="GiayChiTiet1" EntityType="Self.GiayChiTiet1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TTGiay" EntityType="Self.TTGiay" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GiayChiTiet1_TTGiay" Association="Self.FK_GiayChiTiet1_TTGiay">
+            <End Role="TTGiay" EntitySet="TTGiay" />
+            <End Role="GiayChiTiet1" EntitySet="GiayChiTiet1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BanGiay1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GiayChiTiet1">
+          <Key>
+            <PropertyRef Name="idTT" />
+          </Key>
+          <Property Name="idTT" Type="Int32" Nullable="false" />
+          <Property Name="TenGiay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soluong" Type="Int32" Nullable="false" />
+          <Property Name="idGiay" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TTGiay" Relationship="Self.FK_GiayChiTiet1_TTGiay" FromRole="GiayChiTiet1" ToRole="TTGiay" />
+        </EntityType>
+        <EntityType Name="TTGiay">
+          <Key>
+            <PropertyRef Name="idGiay" />
+          </Key>
+          <Property Name="idGiay" Type="Int32" Nullable="false" />
+          <Property Name="LoaiGiay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThongTin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GiayChiTiet1" Relationship="Self.FK_GiayChiTiet1_TTGiay" FromRole="TTGiay" ToRole="GiayChiTiet1" />
+        </EntityType>
+        <Association Name="FK_GiayChiTiet1_TTGiay">
+          <End Role="TTGiay" Type="Self.TTGiay" Multiplicity="1" />
+          <End Role="GiayChiTiet1" Type="Self.GiayChiTiet1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTGiay">
+              <PropertyRef Name="idGiay" />
+            </Principal>
+            <Dependent Role="GiayChiTiet1">
+              <PropertyRef Name="idGiay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BanGiay1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GiayChiTiet1" EntityType="Self.GiayChiTiet1" />
+          <EntitySet Name="TTGiays" EntityType="Self.TTGiay" />
+          <AssociationSet Name="FK_GiayChiTiet1_TTGiay" Association="Self.FK_GiayChiTiet1_TTGiay">
+            <End Role="TTGiay" EntitySet="TTGiays" />
+            <End Role="GiayChiTiet1" EntitySet="GiayChiTiet1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BanGiay1ModelStoreContainer" CdmEntityContainer="BanGiay1Entities">
+          <EntitySetMapping Name="GiayChiTiet1">
+            <EntityTypeMapping TypeName="BanGiay1Model.GiayChiTiet1">
+              <MappingFragment StoreEntitySet="GiayChiTiet1">
+                <ScalarProperty Name="idTT" ColumnName="idTT" />
+                <ScalarProperty Name="TenGiay" ColumnName="TenGiay" />
+                <ScalarProperty Name="Mau" ColumnName="Mau" />
+                <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+                <ScalarProperty Name="idGiay" ColumnName="idGiay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TTGiays">
+            <EntityTypeMapping TypeName="BanGiay1Model.TTGiay">
+              <MappingFragment StoreEntitySet="TTGiay">
+                <ScalarProperty Name="idGiay" ColumnName="idGiay" />
+                <ScalarProperty Name="LoaiGiay" ColumnName="LoaiGiay" />
+                <ScalarProperty Name="ThongTin" ColumnName="ThongTin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

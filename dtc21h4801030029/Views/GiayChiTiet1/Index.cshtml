@@ -1,0 +1,62 @@
+﻿@model IEnumerable<dtc21h4801030029.Models.GiayChiTiet1>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenGiay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TTGiay.LoaiGiay)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenGiay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soluong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TTGiay.LoaiGiay)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idTT }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idTT }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idTT })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@using (Html.BeginForm("SearchByTenGiay", "GiayChiTiet1", FormMethod.Get))
+{
+    <p>
+        Tìm kiếm theo tên sản phẩm: @Html.TextBox("tenGiay")
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
